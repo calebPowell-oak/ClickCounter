@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClickCounter.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace ClickCounter.Services
 {
     public class SessionService : ISessionService
     {
-        private Dictionary<Guid, DateTime> ValidSessions;
+        private Dictionary<Guid, DateTime> ValidSessions = new Dictionary<Guid, DateTime>();
+        private IConfiguration _Configuration;
+
+        public SessionService(IConfiguration Configuration)
+        {
+            _Configuration = Configuration;
+        }
 
         public bool CheckIfSessionValid(Guid sessionId)
         {
@@ -34,7 +41,7 @@ namespace ClickCounter.Services
         public Guid CreateSession()
         {
             Guid guid = Guid.NewGuid();
-            DateTime timeOfExpiration = DateTime.Now.AddMinutes(0.5);
+            DateTime timeOfExpiration = DateTime.Now.AddMinutes(_Configuration.GetValue<int>("SessionLength"));
 
             ValidSessions.Add(guid, timeOfExpiration);
 

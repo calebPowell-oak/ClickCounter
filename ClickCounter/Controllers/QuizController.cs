@@ -8,7 +8,7 @@ using ClickCounter.Services.Interfaces;
 
 namespace ClickCounter.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[action]")]
     [ApiController]
     public class QuizController : ControllerBase
     {
@@ -32,7 +32,7 @@ namespace ClickCounter.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<string> Quiz([FromBody] string answer)
+        public ActionResult<string> Quiz([FromQuery] string answer)
         {
             if (_QuizService.ValidateQuiz(answer))
             {

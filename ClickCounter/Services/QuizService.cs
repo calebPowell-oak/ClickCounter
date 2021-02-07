@@ -26,7 +26,7 @@ namespace ClickCounter.Services
 
             QuizAnswers.Add(randomWord + "," + guid);
 
-            return new string(quizWord + "," + guid);
+            return new string(new string(quizWord) + "," + guid);
         }
 
         public bool ValidateQuiz(string answer)

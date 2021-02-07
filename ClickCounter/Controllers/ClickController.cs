@@ -35,11 +35,15 @@ namespace ClickCounter.Controllers
                 {
                     return Ok(_CountService.CountUp());
                 }
-                return BadRequest("Session invalid");
+                return BadRequest("Session not valid");
 
-            } catch (System.FormatException e)
+            } catch (System.ArgumentNullException)
             {
-                return BadRequest("Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)");
+                return BadRequest("Missing request header: Session-Guid");
+            }
+            catch (System.SystemException e)
+            {
+                return BadRequest(e.Message);
             }
         }
 

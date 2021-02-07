@@ -28,23 +28,22 @@ export class CounterComponent {
       this.currentCount = result;
     });
 
-    //setInterval(() => {
-    //  http.get<number>(baseUrl + 'api/click/count').subscribe(result => {
-    //    this.currentCount = result;
-    //  });
-    //}, 1000);
+    setInterval(() => {
+      http.get<number>(baseUrl + 'api/click/count').subscribe(result => {
+        this.currentCount = result;
+      });
+    }, 1000);
   }
 
   public incrementCounter() {
     this.currentCount++;
-    this.http.get<number>(this.baseUrl + 'api/click/countup', { headers: { 'Session-Guid': '' } }).subscribe(result => { });
+    this.http.get<number>(this.baseUrl + 'api/click/countup', { headers: { 'Session-Guid': this.guid } }).subscribe();
   }
 
   public answerQuiz() {
-    let quizAnswer = `${document.getElementById('answer').value},${this.challengeTail}`;
-    console.log(quizAnswer)
-    this.http.post<string>(this.baseUrl + 'api/quiz/submit', quizAnswer).subscribe(result => {
-
+    let quizAnswer = `${(<HTMLInputElement>document.getElementById('answer')).value},${this.challengeTail}`;
+    this.http.get<string>(this.baseUrl + `api/quiz/submit?answer=${quizAnswer}`).subscribe(result => {
+      this.guid = result;
     });
   }
 }

@@ -8,7 +8,7 @@ using ClickCounter.Services.Interfaces;
 
 namespace ClickCounter.Controllers
 {
-    [Route("api/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class QuizController : ControllerBase
     {

@@ -44,6 +44,7 @@ export class CounterComponent {
     let quizAnswer = `${(<HTMLInputElement>document.getElementById('answer')).value},${this.challengeTail}`;
     this.http.get<string>(this.baseUrl + `api/quiz/submit?answer=${quizAnswer}`).subscribe(result => {
       this.guid = result;
+      this.human = true;
     });
   }
 }

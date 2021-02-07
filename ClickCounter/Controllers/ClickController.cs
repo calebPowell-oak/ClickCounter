@@ -14,16 +14,33 @@ namespace ClickCounter.Controllers
     {
 
         private ICountService _CountService;
+        private ISessionService _SessionService;
 
-        public ClickController(ICountService CountService)
+        public ClickController(ICountService CountService,
+            ISessionService SessionService)
         {
             _CountService = CountService;
+            _SessionService = SessionService;
         }
 
         [HttpGet]
-        public int CountUp()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(440)]
+        public ActionResult<int> CountUp()
         {
-            return _CountService.CountUp();
+            try
+            {
+                if (_SessionService.CheckIfSessionValid(new Guid(Request.Headers["Session-Guid"])))
+                {
+                    return Ok(_CountService.CountUp());
+                }
+                return BadRequest("Session invalid");
+
+            } catch (System.FormatException e)
+            {
+                return BadRequest("Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)");
+            }
         }
 
         [HttpGet]

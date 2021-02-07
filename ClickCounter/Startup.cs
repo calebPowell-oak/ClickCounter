@@ -29,6 +29,8 @@ namespace ClickCounter
                 configuration.RootPath = "ClientApp/dist";
             });
             services.AddSingleton<ICountService, CountService>();
+            services.AddSingleton<IQuizService, QuizService>();
+            services.AddSingleton<ISessionService, SessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

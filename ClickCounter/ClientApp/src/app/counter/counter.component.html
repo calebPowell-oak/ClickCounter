@@ -1,7 +1,61 @@
-<h1>Click Counter</h1>
+<div class="col-md-6 offset-md-3">
 
-<p>So just by juicy coincidence this template had a counter page, what luck!</p>
+  <div class="row">
+    <div class="col text-center">
+      <h1>Click Counter</h1>
+    </div>
+  </div>
 
-<button class="btn btn-primary" (click)="incrementCounter()">Increment</button>
 
-<div style="display: block;" id="odometer" class="odometer" [innerHTML]="currentCount"></div>
+  <p>So just by juicy coincidence this template had a counter page, what luck!</p>
+
+  <h4>
+    You'll need to prove your worthiness to click.
+  </h4>
+
+  <p>You may be wondering why I brought you here today.</p>
+
+  <p>I need you to do a quick quiz.</p>
+
+  <div class="form-group">
+    <div class="col-md-7">
+      <div class="row">
+        <label for="answer">
+          What word is this supposed to be?
+          <p><strong>{{ challengeWord }}</strong></p>
+        </label>
+      </div>
+
+      <div class="row">
+        <input class="form-control" type="text" id="answer" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary" (click)="answerQuiz()">Click Me!</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <p>Here is the thing: {{ guid }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <div style="display: block;" id="odometer" class="odometer" [innerHTML]="currentCount"></div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="human">
+    <div class="col text-center">
+      <button class="btn btn-primary">Welcome, human.</button>
+    </div>
+  </div>
+
+</div>
+

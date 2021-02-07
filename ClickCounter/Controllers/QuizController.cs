@@ -23,13 +23,15 @@ namespace ClickCounter.Controllers
         }
 
         [HttpGet]
+        [ActionName("get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<string> Quiz()
         {
             return Ok(_QuizService.GenerateQuiz());
         }
 
-        [HttpPost]
+        [HttpGet]
+        [ActionName("submit")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<string> Quiz([FromQuery] string answer)

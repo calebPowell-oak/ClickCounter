@@ -1,3 +1,3 @@
 # ClickCounter
 Asp.Net Core Angular project with a button anyone can click!
-## Visit the live version at http://calebgame.com
+## live version no longer available at http://calebgame.com
